@@ -1,25 +1,30 @@
-# Coding Challenge Guidelines
-In the movies.json file you will find a list of 70 movies and the "movie preference" of about 800 users.
+# µv (*mu vee*) - Recommendation Engine
 
-## We would like you to:
+Hey, Selfbook devs! This is µv, a barebones movie recommendation engine based on the prompt you guys gave me.
 
-1. create a application that
-2. takes as input a number of movie ID's and this data file
-3. The application should then calculate and output a list of movie recommendations based on this list and the data file.
+## Interpretation Note
 
-Think about it as an Amazon.com suggestion:
-> the user says he likes movies A, B, C on this list, what other movies from the list would you recommend based on the other user data.
+So there was a little ambiguity on how [the prompt](./PROMPT) defines "application". It could be interpreted as basic CLI with a file input or as a standalone web application. As such I'm going to attempt to satisfy both in the form of this monorepo.
 
-Some points to pay attention to: 
-- Think about testing, documentation, packaging, readability
-- Make sure that the requirements to run the application can be easily run. 
-- There is no "perfect" solution for this problem and there are many ways to try to solve it. Don't try to guess what we think is a good solution.
+## Usage
 
-# CodeSubmit
+You can use the web app here: https://foo.bar
 
-Please organize, design, test and document your code as if it were
-going into production - then push your changes to the master branch.
+```sh
+pnpm i
+pnpm build
+# pnpm coverage
 
-All the best,
+# Use the cli
+npx run mu-v 5 data/movies.json
+```
 
-The CodeSubmit Team
+## Structure
+
+Folder structure looks as follows:
+
+- `app` - A web app, framework yet to be chosen
+- `data` - Static JSON and/or mocked database API
+- `packages`
+  - `cli` - terminal cli
+  - `shared` - functions and types shared between both builds
