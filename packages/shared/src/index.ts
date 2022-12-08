@@ -1,8 +1,18 @@
 import { MovieId, MovieMap } from './types'
 
-export const movies: MovieMap = {}
-
-export const noop = () => { }
+/**
+ * Get Movie Suggestions
+ *
+ * @returns A list of movie ids
+ */
+export const getMovieSuggestionIds = async (
+  movies: MovieMap,
+  limit: number = 1,
+  watchHistory?: MovieId[]
+) => {
+  const keys = Object.keys(movies).map(key => ~~key as MovieId)
+  return getRandomItems(keys, limit, watchHistory)
+}
 
 /**
  * Get Random Movie Keys
@@ -11,25 +21,11 @@ export const noop = () => { }
  */
 export const getRandomMovieIds = (
   movies: MovieMap,
-  range: number = 1,
+  limit: number = 1,
   exclude?: MovieId[]
 ): MovieId[] => {
   const keys = Object.keys(movies).map(key => ~~key as MovieId)
-  return getRandomItems(keys, range, exclude)
-}
-
-/**
- * Get Movie Suggestions
- *
- * @returns A list of movie ids
- */
-export const getMovieSuggestionIds = (
-  movies: MovieMap,
-  range: number = 1,
-  watchHistory?: MovieId[]
-) => {
-  const keys = Object.keys(movies).map(key => ~~key as MovieId)
-  return getRandomItems(keys, range, watchHistory)
+  return getRandomItems(keys, limit, exclude)
 }
 
 /**
@@ -39,10 +35,10 @@ export const getMovieSuggestionIds = (
  */
 export const getRandomItems = <T = any>(
   items: T[],
-  range: number = 1,
+  limit: number = 1,
   exclude?: (T | any)[]
 ) => {
-  if (!items.length || !range) return []
+  if (!items.length || !limit) return []
 
   if (exclude && exclude.length) {
     // TODO: Can be optimized by reducing removing items from exclusion array on match or by converting this to a for loop
@@ -51,17 +47,17 @@ export const getRandomItems = <T = any>(
 
   // const randomId = items[Math.floor(Math.random() * items.length)]
 
-  return randomShuffle(items, range)
+  return randomShuffle(items, limit)
 }
 
 /**
  * Randomized Array
  *
- * Returns a random set of values from a given array
+ * @returns a random set of values from a given array
  */
-const randomShuffle = <T = any>(arr: Array<T> = [], size: number = Infinity): Array<T> => {
+const randomShuffle = <T = any>(arr: Array<T> = [], limit: number = Infinity): Array<T> => {
   const output = []
-  let remaining = Math.max(0, Math.min(size, arr.length)) // Ensure we don't get range errors
+  let remaining = Math.max(0, Math.min(limit, arr.length)) // Ensure we don't get range errors
   let i = 0
 
   while (remaining--) {
