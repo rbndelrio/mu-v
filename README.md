@@ -2,9 +2,30 @@
 
 Hey, Selfbook devs! This is µv, a barebones movie recommendation engine based on the prompt you guys gave me.
 
-## Interpretation Note
+## Interpretation Notes
 
 So there was a little ambiguity on how [the prompt](./PROMPT) defines "application". It could be interpreted as basic CLI with a file input or as a standalone web application. As such I'm going to attempt to satisfy both in the form of this monorepo.
+
+Update: After getting the repo ready I slept on it and worked through how I'd like to approach the computational end of the app. I have a little working knowledge of graph data structures and think a weighted + undirected graph fits the requirements pretty well. Assuming I have the time for it today I'll implement it like so:
+
+### 1. MVP
+- [ ] Create a "random" suggestion algorithm
+- [ ] Compute raw popularity stats for movie data
+- [ ] Attach to CLI
+
+### 2. Full data structure
+- [ ] Create a minimal `WeightedGraph` class and implement it as an adjacency list (optimized for looser relationships like this)
+- [ ] Use that graph class for:
+  - [ ] `UserGraph` for computing user overlap
+  - [ ] `MovieGraph` for computing movie similarity/correlation
+- [ ] Precompute these values
+- [ ] Attach to CLI
+
+### 3. Extra
+- [ ] Crate basic web app implementation
+- [ ] Use "random" algorithm as a fallback?
+- [ ] Polish web app UI
+
 
 ## Usage
 
