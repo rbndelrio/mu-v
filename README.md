@@ -9,9 +9,9 @@ So there was a little ambiguity on how [the prompt](./PROMPT) defines "applicati
 Update: After getting the repo ready I slept on it and worked through how I'd like to approach the computational end of the app. I have a little working knowledge of graph data structures and think a weighted + undirected graph fits the requirements pretty well. Assuming I have the time for it today I'll implement it like so:
 
 ### 1. MVP
-- [ ] Create a "random" suggestion algorithm
+- [*] Create a "random" suggestion algorithm
 - [ ] Compute raw popularity stats for movie data
-- [ ] Attach to CLI
+- [*] Attach to CLI
 
 ### 2. Full data structure
 - [ ] Create a minimal `WeightedGraph` class and implement it as an adjacency list (optimized for looser relationships like this)
@@ -37,7 +37,10 @@ pnpm build
 # pnpm coverage
 
 # Use the cli
-npx run mu-v 5 data/movies.json
+npm link
+mu-v --help
+mu-v --file ./data/movies.json --user 27 --count 6
+# npx run mu-v 5 data/movies.json
 ```
 
 ## Structure
