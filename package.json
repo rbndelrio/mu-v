@@ -1,10 +1,13 @@
 {
-  "name": "@mu-v",
+  "name": "mu-v",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "main": "index.js",
+  "main": "packages/cli/index.js",
   "packageManager": "pnpm@7.18.1",
+  "bin": {
+    "mu-v": "packages/cli/index.js"
+  },
   "scripts": {
     "prebuild": "test \"$CI\" = true && npx pnpm install -r --store=node_modules/.pnpm-store || echo skipping pnpm install",
     "build": "pnpm -r --filter=@mu-v/* run build",
