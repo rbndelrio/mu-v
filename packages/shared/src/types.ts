@@ -6,6 +6,11 @@ export interface UserData {
   movies?: MovieId[];
 }
 
+export interface Movie {
+  id: MovieId
+  title: MovieTitle
+}
+export type MovieKey = `${MovieId}`
 export interface MovieMap {
-  [key: `${MovieId}`]: MovieTitle
+  [key: MovieKey]: MovieTitle
 }
