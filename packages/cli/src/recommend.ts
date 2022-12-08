@@ -1,5 +1,5 @@
-import { getRandomMovieKeys } from '@mu-v/shared';
-import type { MovieKey, MovieMap, UserData } from '@mu-v/shared/src/types.js';
+import { getRandomMovieIds } from '@mu-v/shared';
+import type { MovieMap, UserData } from '@mu-v/shared/src/types.js';
 
 interface RecommendationConfig {
   count: number;
@@ -10,13 +10,16 @@ export const getRecommendations = async ({ count = 1, movies = [], user }: Recom
   if (!user)
     return console.log('User Not Found')
 
-  const userMovieKeys: MovieKey[] = (user.movies || []).map(id => `${id}` as MovieKey)
-  const randomMovieKeys = getRandomMovieKeys(movies, count, userMovieKeys)
+  const movieIds = getRandomMovieIds(movies, count, user.movies || [])
 
-  if (!randomMovieKeys || !randomMovieKeys.length)
+  if (!movieIds || !movieIds.length)
     return console.log('Nothing left to recommend!')
 
-  // Blue just because
-  console.log('\x1b[34mRecommended movies for user #%d:\x1b[0m\n', user.user_id)
-  randomMovieKeys.forEach(key => { console.log(movies[key]) })
+  console.log(
+    // Blue just because
+    '\x1b[34mRecommended movies for user #%d:\x1b[0m\n',
+    user.user_id
+  )
+
+  movieIds.forEach(id => { console.log(movies[`${id}`]) })
 }

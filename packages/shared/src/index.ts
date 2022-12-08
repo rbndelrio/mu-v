@@ -1,4 +1,4 @@
-import { MovieKey, MovieMap } from './types'
+import { MovieId, MovieMap } from './types'
 
 export const movies: MovieMap = {}
 
@@ -9,12 +9,12 @@ export const noop = () => { }
  *
  * @returns A list of movie keys (integers coerced as strings)
  */
-export const getRandomMovieKeys = (
+export const getRandomMovieIds = (
   movies: MovieMap,
   range: number = 1,
-  exclude?: MovieKey[]
-): MovieKey[] => {
-  const keys = Object.keys(movies) as MovieKey[]
+  exclude?: MovieId[]
+): MovieId[] => {
+  const keys = Object.keys(movies).map(key => ~~key as MovieId)
   return getRandomItems(keys, range, exclude)
 }
 
