@@ -1,0 +1,28 @@
+{
+  "name": "@mu-v",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "index.js",
+  "packageManager": "pnpm@7.18.1",
+  "scripts": {
+    "prebuild": "test \"$CI\" = true && npx pnpm install -r --store=node_modules/.pnpm-store || echo skipping pnpm install",
+    "build": "pnpm -r --filter=@mu-v/* run build",
+    "dev": "pnpm -r --parallel --filter=@mu-v/* run dev",
+    "lib:build": "pnpm -r --filter=./packages/* run build",
+    "lib:dev": "pnpm -r --parallel --filter=./packages/* run dev",
+    "app:build": "npm -C app run build",
+    "app:dev": "npm -C app run dev",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.11",
+    "@vitest/coverage-c8": "^0.25.5",
+    "pnpm": "^7.18.1",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.3",
+    "vite": "^3.2.5",
+    "vitest": "^0.25.5"
+  }
+}
