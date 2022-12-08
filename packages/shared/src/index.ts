@@ -4,25 +4,40 @@ export const movies: MovieMap = {}
 
 export const noop = () => { }
 
-export const getRandomMovieIds = (
+/**
+ * Get Random Movie Keys
+ *
+ * @returns A list of movie keys (integers coerced as strings)
+ */
+export const getRandomMovieKeys = (
   movies: MovieMap,
   range: number = 1,
   exclude?: MovieKey[]
 ): MovieKey[] => {
-  // const matches: MovieKey[] = []
+  const keys = Object.keys(movies) as MovieKey[]
+  return getRandomItems(keys, range, exclude)
+}
 
-  let keys = Object.keys(movies) as MovieKey[]
-
-  if (!keys.length || !range) return []
+/**
+ * Get Random Items
+ *
+ * @returns random items from an array without duplicates
+ */
+export const getRandomItems = <T = any>(
+  items: T[],
+  range: number = 1,
+  exclude?: (T | any)[]
+) => {
+  if (!items.length || !range) return []
 
   if (exclude && exclude.length) {
     // TODO: Can be optimized by reducing removing items from exclusion array on match or by converting this to a for loop
-    keys = keys.filter(id => !exclude.includes(id))
+    items = items.filter(id => !exclude.includes(id))
   }
 
-  // const randomId = keys[Math.floor(Math.random() * keys.length)]
+  // const randomId = items[Math.floor(Math.random() * items.length)]
 
-  return randomShuffle(keys, range)
+  return randomShuffle(items, range)
 }
 
 /**
@@ -31,14 +46,14 @@ export const getRandomMovieIds = (
  * Returns a random set of values from a given array
  */
 const randomShuffle = <T = any>(arr: Array<T> = [], size: number = Infinity): Array<T> => {
-  var o = [],
-      r = Math.max(0, Math.min(size, arr.length)),
-      j = 0;
+  const output = []
+  let remaining = Math.max(0, Math.min(size, arr.length)) // Ensure we don't get range errors
+  let i = 0
 
-  while (r--) {
-    j = Math.floor(Math.random() * (arr.length+1));
-    o.push(arr.splice(j, 1)[0])
+  while (remaining--) {
+    i = Math.floor(Math.random() * arr.length) // Random item in the input array
+    output.push(arr.splice(i, 1)[0]) // Moves element from input array to the output
   }
 
-  return o;
+  return output
 }
