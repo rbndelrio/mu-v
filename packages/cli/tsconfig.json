@@ -1,7 +1,14 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "target": "ES2020",
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "esModuleInterop": true,
+    "paths": {
+      "@mu-v/shared": ["packages/shared/src/index.ts"]
+    }
   },
-  "include": ["src"]
+  "include": ["src", "cli.d.ts"]
 }

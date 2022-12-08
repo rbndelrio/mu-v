@@ -1,3 +1,4 @@
 #!/usr/bin/env node
 
-import './dist/index.mjs';
+// TODO: Fix esm imports
+import './dist/index.cjs';
