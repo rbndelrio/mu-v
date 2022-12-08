@@ -1,4 +1,4 @@
-import { getRandomMovieIds } from '@mu-v/shared';
+import { getMovieSuggestionIds } from '@mu-v/shared';
 import type { MovieMap, UserData } from '@mu-v/shared/src/types.js';
 
 interface RecommendationConfig {
@@ -10,7 +10,8 @@ export const getRecommendations = async ({ count = 1, movies = [], user }: Recom
   if (!user)
     return console.log('User Not Found')
 
-  const movieIds = getRandomMovieIds(movies, count, user.movies || [])
+  const watchHistory = user.movies || []
+  const movieIds = await getMovieSuggestionIds(movies, count, watchHistory)
 
   if (!movieIds || !movieIds.length)
     return console.log('Nothing left to recommend!')

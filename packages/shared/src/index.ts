@@ -7,7 +7,7 @@ export const noop = () => { }
 /**
  * Get Random Movie Keys
  *
- * @returns A list of movie keys (integers coerced as strings)
+ * @returns A list of movie ids
  */
 export const getRandomMovieIds = (
   movies: MovieMap,
@@ -16,6 +16,20 @@ export const getRandomMovieIds = (
 ): MovieId[] => {
   const keys = Object.keys(movies).map(key => ~~key as MovieId)
   return getRandomItems(keys, range, exclude)
+}
+
+/**
+ * Get Movie Suggestions
+ *
+ * @returns A list of movie ids
+ */
+export const getMovieSuggestionIds = (
+  movies: MovieMap,
+  range: number = 1,
+  watchHistory?: MovieId[]
+) => {
+  const keys = Object.keys(movies).map(key => ~~key as MovieId)
+  return getRandomItems(keys, range, watchHistory)
 }
 
 /**
