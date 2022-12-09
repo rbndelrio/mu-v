@@ -68,7 +68,7 @@ export const preprocessData = (users: UserData[], movies: MovieMap) => {
 
     moviesByPopularity: movieIds.sort(
       (a, b) =>
-        // By year
+        // By popularity
         (movieMeta[a].popularity - movieMeta[b].popularity) ||
         // then by title I guess?
         movieMeta[a].title.localeCompare(movieMeta[b].title)
