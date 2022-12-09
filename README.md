@@ -9,9 +9,9 @@ So there was a little ambiguity on how [the prompt](./PROMPT) defines "applicati
 Update: After getting the repo ready I slept on it and worked through how I'd like to approach the computational end of the app. I have a little working knowledge of graph data structures and think a weighted + undirected graph fits the requirements pretty well. Assuming I have the time for it today I'll implement it like so:
 
 ### 1. MVP
-- [*] Create a "random" suggestion algorithm
-- [ ] Compute raw popularity stats for movie data
-- [*] Attach to CLI
+- [x] Create a "random" suggestion algorithm
+- [x] Compute raw popularity stats for movie data
+- [x] Attach to CLI
 
 ### 2. Full data structure
 - [ ] Create a minimal `WeightedGraph` class and implement it as an adjacency list (optimized for looser relationships like this)
@@ -23,7 +23,7 @@ Update: After getting the repo ready I slept on it and worked through how I'd li
 
 ### 3. Extra
 - [ ] Crate basic web app implementation
-- [ ] Use "random" algorithm as a fallback?
+- [X] Use "random" algorithm as a fallback?
 - [ ] Polish web app UI
 
 
