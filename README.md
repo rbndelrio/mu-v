@@ -4,9 +4,9 @@ Hey, Selfbook devs! This is µv, a barebones movie recommendation engine based o
 
 ## Interpretation Notes
 
-So there was a little ambiguity on how [the prompt](./PROMPT) defines "application". It could be interpreted as basic CLI with a file input or as a standalone web application. As such I'm going to attempt to satisfy both in the form of this monorepo.
+So there was a little ambiguity on how [the prompt](./PROMPT) defines "application". It could be interpreted as basic CLI with a file input or as a standalone web application. As such I'm going to attempt to satisfy both in the form of this monorepo (UPDATE: Just the CLI).
 
-Update: After getting the repo ready I slept on it and worked through how I'd like to approach the computational end of the app. I have a little working knowledge of graph data structures and think a weighted + undirected graph fits the requirements pretty well. Assuming I have the time for it today I'll implement it like so:
+Update: After getting the repo ready I slept on it and worked through how I'd like to approach the computational end of the app. I have a little working knowledge of graph data structures and think a weighted + undirected graph fits the requirements pretty well. ~~Assuming I have the time for it today~~ Given the opportunity to expand the scope, I'd implement it like so:
 
 ### 1. MVP
 - [x] Create a "random" suggestion algorithm
@@ -29,18 +29,27 @@ Update: After getting the repo ready I slept on it and worked through how I'd li
 
 ## Usage
 
-You can use the web app here: https://foo.bar
+NOTE: Might require Node 18.x!
 
 ```sh
+# This project uses pnpm's workspace feature, it's very lean!
 pnpm i
 pnpm build
-# pnpm coverage
 
 # Use the cli
 npm link
 mu-v --help
 mu-v --file ./data/movies.json --user 27 --count 6
+
+# Also works with shorthand arguments
+mu-v -f ./data/movies.json -u 17
+
+# this might work too?
 # npx run mu-v 5 data/movies.json
+
+# Also:
+# pnpm coverage
+# pnpm test
 ```
 
 ## Structure
