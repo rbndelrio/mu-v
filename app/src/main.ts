@@ -1,4 +1,4 @@
-import { noop } from '@mu-v/shared'
+import {  } from '@mu-v/shared'
 
-noop()
+
 console.log('!!!')
