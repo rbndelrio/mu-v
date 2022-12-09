@@ -2,6 +2,8 @@
 
 Hey, Selfbook devs! This is µv, a barebones movie recommendation engine based on the prompt you guys gave me.
 
+This repo uses [conventional commits](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional) with bitbucket/github emojis. You'll find most of the relevant code under `packages` including a few tests.
+
 ## Interpretation Notes
 
 So there was a little ambiguity on how [the prompt](./PROMPT) defines "application". It could be interpreted as basic CLI with a file input or as a standalone web application. As such I'm going to attempt to satisfy both in the form of this monorepo (UPDATE: Just the CLI).
