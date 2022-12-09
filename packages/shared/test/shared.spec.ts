@@ -1,10 +1,9 @@
-import { describe, expect, expectTypeOf, test, vi } from 'vitest'
-import {
-  getMovieSuggestionIds,
-  getRandomItems,
-} from "../src/index"
+import { describe, expect, test } from 'vitest';
 
-import json from '../../../data/movies.json'
+import { getMovieSuggestionIds } from "../src/index";
+import { getRandomItems } from '../src/random';
+
+import json from '../../../data/movies.json';
 
 // One-liner PRNG
 // https://gist.github.com/blixt/f17b47c62508be59987b?permalink_comment_id=2682175#gistcomment-2682175
@@ -17,7 +16,7 @@ describe('shared', async () => {
 
     // Mock random-feeling numbers
     Math.random = () => prng()
-    
+
     expect(
       await getMovieSuggestionIds(json.movies, 4, [36])
     ).toEqual([1, 37, 10, 31])
