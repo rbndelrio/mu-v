@@ -29,8 +29,7 @@ async function recommend (opts: Record<string, any>) {
   } = JSON.parse(fileString)
 
   const user = (users || []).find((u: any) => u?.user_id === userId)
-
-  getRecommendations({ movies, count, user })
+  getRecommendations({ movies, count, user, users })
 }
 
 async function readFile(filePath: string) {
