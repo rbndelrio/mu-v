@@ -19,7 +19,7 @@ export const suggestWeightedMovies = (
   }
 
   // Results will use RNG but will skew heavily towards the first quarter of the results
-  return pickItemsWithLimit<MovieId>(
+  return pickItems<MovieId>(
     items,
     (arr) => Math.floor((Math.random() ** 4) * arr.length),
     limit
@@ -44,10 +44,27 @@ const subtractItems = <T = any>(
   return items
 }
 
-type IndexPicker<T> = (arr: T[]) => number
-const pickItemsWithLimit = <T = any>(
+type IndexPicker<T = any> = (arr: T[]) => number
+
+/** Pick First Item */
+export const pickFirst: IndexPicker = () => 0
+
+/** Fully Random Item */
+export const pickRandom: IndexPicker = (arr) => Math.floor(Math.random() * arr.length)
+
+/** Weighted Random Item */
+export const pickWeightedRandom: IndexPicker = (arr) => Math.floor((Math.random() ** 4) * arr.length)
+
+/**
+ * Pick Items With Limit
+ * @param arr Array to pick from
+ * @param picker Function to select an index from `arr`
+ * @param limit Max number of items to return
+ * @returns Array of picked items
+ */
+export const pickItems = <T = any>(
   arr: Array<T> = [],
-  picker: IndexPicker<T>,
+  picker: IndexPicker<T> = pickFirst,
   limit: number = Infinity
 ): Array<T> => {
   const output = []
@@ -55,7 +72,7 @@ const pickItemsWithLimit = <T = any>(
   let i = 0
 
   while (remaining--) {
-    i = picker(arr) // Picked item in the input array
+    i = picker(arr) || 0 // Picked item in the input array
     output.push(arr.splice(i, 1)[0]) // Moves element from input array to the output
   }
 

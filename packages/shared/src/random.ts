@@ -1,11 +1,13 @@
 import { MovieId, MovieMap } from './types'
+import { pickItems } from './weighted'
 
 /**
  * Get Random Movie Keys
  *
  * @returns A list of movie ids
+ * @deprecated Use getRandomItems() or suggestWeightedMovies()
  */
-export const getRandomMovieIds = (
+const getRandomMovieIds = (
   movies: MovieMap,
   limit: number = 1,
   exclude?: MovieId[]
@@ -31,15 +33,18 @@ export const getRandomItems = <T = any>(
     items = items.filter(id => !exclude.includes(id))
   }
 
-  // const randomId = items[Math.floor(Math.random() * items.length)]
-
-  return randomShuffle(items, limit)
+  return pickItems(
+    items,
+    (arr) => Math.floor(Math.random() * arr.length),
+    limit
+  )
 }
 
 /**
  * Randomized Array
  *
  * @returns a random set of values from a given array
+ * @deprecated Use pickItems()
  */
 const randomShuffle = <T = any>(arr: Array<T> = [], limit: number = Infinity): Array<T> => {
   const output = []
